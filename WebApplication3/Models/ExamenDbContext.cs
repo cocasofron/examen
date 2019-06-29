@@ -14,20 +14,13 @@ namespace WebApplication3.Models
                 entity.HasIndex(u => u.Username).IsUnique();
             });
 
-            //builder.Entity<Comment>()
-            //   .HasOne(e => e.Movie)
-            //   .WithMany(c => c.Comments)
-            //   .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.Entity<Movie>()
-            //  .HasOne(t => t.Owner)
-            //  .WithMany(c => c.Movies)
-            //  .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Package>(entity => {
+                entity.HasIndex(u => u.TrackingCode).IsUnique();
+            });
 
         }
 
-        //public DbSet<Movie> Movies { get; set; }
-        //public DbSet<Comment>Comments { get; set; }
+        public DbSet<Package> Packages { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

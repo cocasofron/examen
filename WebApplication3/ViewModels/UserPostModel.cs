@@ -19,9 +19,9 @@ namespace WebApplication3.ViewModels
         {
             UserRole rol = WebApplication3.Models.UserRole.Regular;
 
-            if (userPostModel.UserRole == "UserManager")
+            if (userPostModel.UserRole == "Moderator")
             {
-                rol = WebApplication3.Models.UserRole.UserManager;
+                rol = WebApplication3.Models.UserRole.Moderator;
             }
             else if (userPostModel.UserRole == "Admin")
             {

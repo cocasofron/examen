@@ -77,7 +77,6 @@ namespace WebApplication3.Controllers
         }
 
         [AllowAnonymous]
-        //[Authorize(Roles = "UserManager, Admin")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -106,7 +105,7 @@ namespace WebApplication3.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         // GET: api/Users/5
-        [Authorize(Roles = "Admin, UserManager")]
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult Get(int id)
         {
@@ -138,7 +137,7 @@ namespace WebApplication3.Controllers
         /// <param name="userPostDTO">The input user to be added</param>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(Roles = "Admin, UserManager")]
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         public void Post([FromBody] UserPostModel userPostDTO)
         {
@@ -166,7 +165,7 @@ namespace WebApplication3.Controllers
         /// <returns>Status 200 daca a fost modificat</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [Authorize(Roles = "Admin,UserManager")]
+        [Authorize(Roles = "Admin,Moderator")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] UserPostModel userPostDTO)
         {
@@ -189,7 +188,7 @@ namespace WebApplication3.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [Authorize(Roles = "Admin, UserManager")]
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -206,7 +205,7 @@ namespace WebApplication3.Controllers
             var currentDate = DateTime.Now;
             var minDate = currentDate.Subtract(regDate).Days / (365 / 12);
 
-            if (currentLogedUser.UserRole == UserRole.UserManager)
+            if (currentLogedUser.UserRole == UserRole.Moderator)
             {
                 User getUser = _userService.GetById(id);
                 if (getUser.UserRole == UserRole.Admin)
@@ -216,17 +215,17 @@ namespace WebApplication3.Controllers
 
             }
 
-            if (currentLogedUser.UserRole == UserRole.UserManager)
+            if (currentLogedUser.UserRole == UserRole.Moderator)
             {
                 User getUser = _userService.GetById(id);
-                if (getUser.UserRole == UserRole.UserManager && minDate <= 6)
+                if (getUser.UserRole == UserRole.Moderator && minDate <= 6)
 
                     return Forbid();
             }
-            if (currentLogedUser.UserRole == UserRole.UserManager)
+            if (currentLogedUser.UserRole == UserRole.Moderator)
             {
                 User getUser = _userService.GetById(id);
-                if (getUser.UserRole == UserRole.UserManager && minDate >= 6)
+                if (getUser.UserRole == UserRole.Moderator && minDate >= 6)
                 {
                     var result1 = _userService.Delete(id);
                     return Ok(result1);

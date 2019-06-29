@@ -94,6 +94,7 @@ namespace WebApplication3
             //services.AddScoped<IMovieService, MovieService>();
             //services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IPackagesService, PackagesService>();
 
         }
 

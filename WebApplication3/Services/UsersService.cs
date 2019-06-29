@@ -179,8 +179,8 @@ namespace WebApplication3.Services
             {
                 return null;
             }
-            else if ((existing.UserRole.Equals(UserRole.Regular) && addedBy.UserRole.Equals(UserRole.UserManager)) ||
-                (existing.UserRole.Equals(UserRole.UserManager) && addedBy.UserRole.Equals(UserRole.UserManager) && addedBy.DataRegistered.AddMonths(6) <= DateTime.Now))
+            else if ((existing.UserRole.Equals(UserRole.Regular) && addedBy.UserRole.Equals(UserRole.Moderator)) ||
+                (existing.UserRole.Equals(UserRole.Moderator) && addedBy.UserRole.Equals(UserRole.Moderator) && addedBy.DataRegistered.AddMonths(6) <= DateTime.Now))
             {
                 context.Users.Update(toUpdate);
                 context.SaveChanges();

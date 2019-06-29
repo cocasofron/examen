@@ -9,7 +9,7 @@ namespace WebApplication3.Models
     public enum UserRole
     {
         Regular,
-        UserManager,
+        Moderator,
         Admin,
     }
     public class User
@@ -25,6 +25,5 @@ namespace WebApplication3.Models
         public UserRole UserRole { get; set; }
 
         public DateTime DataRegistered { get; set; }
-       
     }
 }
